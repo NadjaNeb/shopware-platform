@@ -139,6 +139,10 @@
           "name": "Name"
         }
       }
+    },
+    "tabAdditionalSettings" : {
+      "title": "Additional Settings",
+      "checkBackendWarning" : "Show Backend-Background in red"
     }
   },
   "sw-privileges": {

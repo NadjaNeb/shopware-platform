@@ -2,6 +2,7 @@ import './extension/sw-admin-menu';
 import './page/sw-profile-index';
 import './view/sw-profile-index-general';
 import './view/sw-profile-index-search-preferences';
+import './view/sw-profile-index-additional-settings';
 import './acl';
 
 const { Module } = Shopware;
@@ -38,6 +39,14 @@ Module.register('sw-profile', {
                 searchPreferences: {
                     component: 'sw-profile-index-search-preferences',
                     path: 'search-preferences',
+                    meta: {
+                        parentPath: 'sw.profile.index',
+                        privilege: 'user.update_profile',
+                    },
+                },
+                additionalSettings: {
+                    component: 'sw-profile-index-additional-settings',
+                    path: 'additional-settings',
                     meta: {
                         parentPath: 'sw.profile.index',
                         privilege: 'user.update_profile',

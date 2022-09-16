@@ -58,6 +58,15 @@
                     {{ $tc('sw-profile.tabSearchPreferences.title') }}
                 </sw-tabs-item>
                 {% endblock %}
+
+                {% block sw_profile_index_tabs_item_color %}
+                <sw-tabs-item
+                    :route="{ name: 'sw.profile.index.additionalSettings' }"
+                    :title="$tc('sw-profile.tabAdditionalSettings.title')"
+                >
+                    {{ $tc('sw-profile.tabAdditionalSettings.title') }}
+                </sw-tabs-item>
+                {% endblock %}
             </sw-tabs>
             {% endblock %}
 

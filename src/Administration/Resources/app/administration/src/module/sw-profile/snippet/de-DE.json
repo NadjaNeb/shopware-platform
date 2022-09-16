@@ -142,6 +142,10 @@
           "name": "Name"
         }
       }
+    },
+    "tabAdditionalSettings" : {
+      "title": "Weitere Einstellungen",
+      "checkBackendWarning" : "Backend-Hintergrund rot darstellen"
     }
   },
   "sw-privileges": {
