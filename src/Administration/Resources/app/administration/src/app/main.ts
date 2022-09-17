@@ -37,6 +37,7 @@ import AppAclService from 'src/app/service/app-acl.service';
 import ShopwareDiscountCampaignService from 'src/app/service/discount-campaign.service';
 import SearchRankingService from 'src/app/service/search-ranking.service';
 import SearchPreferencesService from 'src/app/service/search-preferences.service';
+import AdditionalSettingsService from 'src/app/service/additional-settings.service';
 import RecentlySearchService from 'src/app/service/recently-search.service';
 
 /** Import Feature */
@@ -184,6 +185,11 @@ Application
     })
     .addServiceProvider('searchPreferencesService', () => {
         return new SearchPreferencesService({
+            userConfigRepository: Shopware.Service('repositoryFactory').create('user_config'),
+        });
+    })
+    .addServiceProvider('additionalSettingsService', () => {
+        return new AdditionalSettingsService({
             userConfigRepository: Shopware.Service('repositoryFactory').create('user_config'),
         });
     });

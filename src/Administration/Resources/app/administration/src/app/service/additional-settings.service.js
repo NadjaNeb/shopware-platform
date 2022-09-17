@@ -1,7 +1,7 @@
 // import { KEY_USER_SEARCH_PREFERENCE } from 'src/app/service/search-ranking.service';
 
 /**
-* @description Exposes an user search preferences
+* @description Exposes an user additional settings
 * @constructor
 * @param {Object} Object.userConfigRepository
 */
@@ -16,7 +16,7 @@ export default function AdditionalSettingsService({ userConfigRepository: _userC
     };
 
     /**
-    * @description Get default search preferences
+    * @description Get default additional settings
     * @returns {Array}
     */
     function getDefaultAdditionalSettings() {
@@ -42,11 +42,11 @@ export default function AdditionalSettingsService({ userConfigRepository: _userC
     * @returns {Promise}
     */
     function getUserAdditionalSettings() {
-        return new Promise(async (resolve) => {
-            const response = await Shopware.Service('userConfigService').search([KEY_USER_SEARCH_PREFERENCE]);
-
-            resolve(response.data[KEY_USER_SEARCH_PREFERENCE] || null);
-        });
+        // return new Promise(async (resolve) => {
+        //     const response = await Shopware.Service('userConfigService').search([KEY_USER_SEARCH_PREFERENCE]);
+        //
+        //     resolve(response.data[KEY_USER_SEARCH_PREFERENCE] || null);
+        // });
     }
 
     /**
@@ -131,7 +131,7 @@ export default function AdditionalSettingsService({ userConfigRepository: _userC
     function _getUserConfigCriteria() {
         const criteria = new Shopware.Data.Criteria();
 
-        criteria.addFilter(Shopware.Data.Criteria.equals('key', KEY_USER_SEARCH_PREFERENCE));
+        // criteria.addFilter(Shopware.Data.Criteria.equals('key', KEY_USER_SEARCH_PREFERENCE));
         criteria.addFilter(Shopware.Data.Criteria.equals('userId', _getCurrentUser()?.id));
 
         return criteria;

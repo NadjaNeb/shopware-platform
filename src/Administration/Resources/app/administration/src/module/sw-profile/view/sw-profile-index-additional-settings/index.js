@@ -39,7 +39,7 @@ Component.register('sw-profile-index-additional-settings', {
         },
 
         defaultAdditionalSettings() {
-            // const defaultAdditionalSettings = this.searchPreferencesService.getDefaultSearchPreferences();
+            const defaultAdditionalSettings = this.additionalSettingsService.getDefaultAdditionalSettings();
 
             if (this.userAdditionalSettings === null) {
                 return defaultAdditionalSettings;
@@ -58,6 +58,7 @@ Component.register('sw-profile-index-additional-settings', {
     },
 
     created() {
+        this.createdComponent();
     },
 
     beforeDestroy() {
@@ -65,26 +66,27 @@ Component.register('sw-profile-index-additional-settings', {
 
     methods: {
         createdComponent() {
-            // this.getDataSource();
+            this.getDataSource();
             // this.addEventListeners();
         },
 
-        // async getDataSource() {
-        //     this.isLoading = true;
-        //
-        //     try {
-        //         this.userAdditionalSettings = await this.searchPreferencesService.getUserSearchPreferences();
-        //         this.additionalSettings = this.searchPreferencesService.processSearchPreferences(
-        //             this.defaultSearchPreferences,
-        //         );
-        //     } catch (error) {
-        //         this.createNotificationError({ message: error.message });
-        //         this.additionalSettings = [];
-        //         this.userAdditionalSettings = null;
-        //     } finally {
-        //         this.isLoading = false;
-        //     }
-        // },
+        async getDataSource() {
+            console.log('loading');
+            this.isLoading = true;
+
+            try {
+                this.userAdditionalSettings = await this.additionalSettingsService.getUserAdditionalSettings();
+                this.additionalSettings = this.additionalSettingsService.processAdditionalSettings(
+                    this.defaultAdditionalSettings,
+                );
+            } catch (error) {
+                this.createNotificationError({ message: error.message });
+                this.additionalSettings = [];
+                this.userAdditionalSettings = null;
+            } finally {
+                this.isLoading = false;
+            }
+        },
 
         onChangeAdditionalSettings(additionalSettings) {
             if (additionalSettings._colourchange && additionalSettings.fields.every((field) => !field._colourchange)) {
