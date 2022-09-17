@@ -142,7 +142,7 @@
     },
     "tabAdditionalSettings" : {
       "title": "Additional Settings",
-      "checkBackendWarning" : "Show Backend-Background in red"
+      "checkColourChange": "Show Backend-Background personalized"
     }
   },
   "sw-privileges": {

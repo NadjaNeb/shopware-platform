@@ -7,7 +7,10 @@ const { Component, Module, State, Mixin } = Shopware;
 Component.register('sw-profile-index-additional-settings', {
     template,
 
+    inject: ['additionalSettingsService'],
+
     mixins: [
+        Mixin.getByName('notification'),
     ],
 
     data() {
@@ -17,6 +20,41 @@ Component.register('sw-profile-index-additional-settings', {
     },
 
     computed: {
+        additionalSettings: {
+            get() {
+                return State.get('swProfile').additionalSettings;
+            },
+            set(additionalSettings) {
+                State.commit('swProfile/setAdditionalSettings', additionalSettings);
+            },
+        },
+
+        userAdditionalSettings: {
+            get() {
+                return State.get('swProfile').userAdditionalSettings;
+            },
+            set(userAdditionalSettings) {
+                State.commit('swProfile/setUserAdditionalSettings', userAdditionalSettings);
+            },
+        },
+
+        defaultAdditionalSettings() {
+            // const defaultAdditionalSettings = this.searchPreferencesService.getDefaultSearchPreferences();
+
+            if (this.userAdditionalSettings === null) {
+                return defaultAdditionalSettings;
+            }
+
+            return defaultAdditionalSettings.reduce((accumulator, currentValue) => {
+                const value = this.userAdditionalSettings.find((item) => {
+                    return Object.keys(item)[0] === Object.keys(currentValue)[0];
+                });
+
+                accumulator.push(value || currentValue);
+
+                return accumulator;
+            }, []);
+        },
     },
 
     created() {
@@ -26,5 +64,53 @@ Component.register('sw-profile-index-additional-settings', {
     },
 
     methods: {
+        createdComponent() {
+            // this.getDataSource();
+            // this.addEventListeners();
+        },
+
+        // async getDataSource() {
+        //     this.isLoading = true;
+        //
+        //     try {
+        //         this.userAdditionalSettings = await this.searchPreferencesService.getUserSearchPreferences();
+        //         this.additionalSettings = this.searchPreferencesService.processSearchPreferences(
+        //             this.defaultSearchPreferences,
+        //         );
+        //     } catch (error) {
+        //         this.createNotificationError({ message: error.message });
+        //         this.additionalSettings = [];
+        //         this.userAdditionalSettings = null;
+        //     } finally {
+        //         this.isLoading = false;
+        //     }
+        // },
+
+        onChangeAdditionalSettings(additionalSettings) {
+            if (additionalSettings._colourchange && additionalSettings.fields.every((field) => !field._colourchange)) {
+                additionalSettings.fields.forEach((field) => {
+                    field._colourchange = true;
+                    console.log('change? ' .field._colourchange);
+                });
+            }
+        },
+
+        onSelect(event) {
+            this.additionalSettings.forEach((additionalSettings) => {
+                additionalSettings._colourchange = event;
+                additionalSettings.fields.forEach((field) => {
+                    field._colourchange = event;
+                });
+            });
+        },
+
+        //maybe add onReset
+
+        resetAdditionalSettings(toReset, additionalSettings) {
+            additionalSettings._colourchange = toReset._colourchange;
+            additionalSettings.fields = additionalSettings.fields.map((field) => {
+                return toReset.fields.find((item) => item.fieldName === field.fieldName) || field;
+            });
+        },
     },
 });

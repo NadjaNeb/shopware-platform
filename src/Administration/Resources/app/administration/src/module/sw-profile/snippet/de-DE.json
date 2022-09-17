@@ -145,7 +145,7 @@
     },
     "tabAdditionalSettings" : {
       "title": "Weitere Einstellungen",
-      "checkBackendWarning" : "Backend-Hintergrund rot darstellen"
+      "checkColourChange": "Backend-Hintergrund personalisieren"
     }
   },
   "sw-privileges": {

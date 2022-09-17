@@ -6,6 +6,8 @@ export default {
         return {
             searchPreferences: [],
             userSearchPreferences: null,
+            additionalSettings: [],
+            userAdditionalSettings: null,
         };
     },
 
@@ -15,6 +17,12 @@ export default {
         },
         setUserSearchPreferences(state, userSearchPreferences) {
             state.userSearchPreferences = userSearchPreferences;
+        },
+        setAdditionalSettings(state, additionalSettings) {
+            state.additionalSettings = additionalSettings;
+        },
+        setUserAdditionalSettings(state, userAdditionalSettings) {
+            state.userAdditionalSettings = userAdditionalSettings;
         },
     },
 };

@@ -1,12 +1,54 @@
 {% block sw_profile_index_additional_settings %}
-<div class="sw-profile-index-additional-settings">
-    test
+    <div class="sw-profile-index-additional-settings">
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block sw_profile_index_additional_settings_elements %}
+            <sw-card
+                class="sw-profile-index-additional-settings-elements"
+                position-identifier="sw-profile-index-additional-settings"
+                :title="$tc('sw-profile.tabAdditionalSettings.title')"
+                :is-loading="isLoading"
+            >
+                TestAdditional3
+{#                <sw-checkbox-field#}
+{#                    v-model="field._colourchange"#}
+{#                    :label="$tc(`sw-profile.tabAdditionalSettings.checkColourChange`)"#}
+{#                    :disabled="!additionalSettings._colourchange"#}
+{#                />#}
 
-{#    <sw-checkbox-field#}
-{#        v-model="field._searchable"#}
-{#        :label="$tc(`sw-profile.tabAdditionalSettings.checkBackendWarning`)"#}
-{#        :disabled="!searchPreference._searchable"#}
-{#    />#}
-</div>
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block sw_profile_index_additional_settings_elements_body %}
+                    <div class="sw-profile-index-additional-settings-elements__entity-container">
+                        <ul
+                            v-for="additionalSetting in additionalSettings"
+                            :key="additionalSetting.entityName"
+                            class="sw-profile-index-additional-settings-elements__entity"
+                        >
+                            <li class="sw-profile-index-additional-settings-elements__entity-field">
+                                <sw-checkbox-field
+                                    v-model="additionalSetting._colourchange"
+                                    :label="$tc(`sw-profile.tabAdditionalSettings.checkColourChange`)"
+{#                                    :label="getModuleTitle(additionalSetting.entityName)"#}
+                                    @change="onChangeAdditionalSettings(additionalSetting)"
+                                />
+                                <ul class="sw-profile-index-additional-settings-elements__entity">
+                                    <li
+                                        v-for="field in additionalSetting.fields"
+                                        :key="field.fieldName"
+                                        class="sw-profile-index-additional-settings-elements__entity-field"
+                                    >
+                                        <sw-checkbox-field
+                                            v-model="field._colourchange"
+                                            :label="$tc(`sw-profile.tabAdditionalSettings.checkColourChange`)"
+                                            :disabled="!additionalSetting._colourchange"
+                                        />
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                {% endblock %}
+            </sw-card>
+        {% endblock %}
+    </div>
 
 {% endblock %}
