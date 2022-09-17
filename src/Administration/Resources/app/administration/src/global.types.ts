@@ -111,6 +111,7 @@ declare global {
         shopwareDiscountCampaignService: ShopwareDiscountCampaignService,
         searchRankingService: $TSFixMe,
         searchPreferencesService: $TSFixMe,
+        additionalSettingsService: $TSFixMe,
         storeService: StoreApiService,
         repositoryFactory: RepositoryFactory,
         snippetService: $TSFixMe,

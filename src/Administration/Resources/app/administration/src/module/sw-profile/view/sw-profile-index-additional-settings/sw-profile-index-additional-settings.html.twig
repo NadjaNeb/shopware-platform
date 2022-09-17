@@ -8,13 +8,9 @@
                 :title="$tc('sw-profile.tabAdditionalSettings.title')"
                 :is-loading="isLoading"
             >
-                TestAdditional3
-{#                <sw-checkbox-field#}
-{#                    v-model="field._colourchange"#}
-{#                    :label="$tc(`sw-profile.tabAdditionalSettings.checkColourChange`)"#}
-{#                    :disabled="!additionalSettings._colourchange"#}
-{#                />#}
 
+                <sw-checkbox-field>
+                </sw-checkbox-field>
                 <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
                 {% block sw_profile_index_additional_settings_elements_body %}
                     <div class="sw-profile-index-additional-settings-elements__entity-container">
